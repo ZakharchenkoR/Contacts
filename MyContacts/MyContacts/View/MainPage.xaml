@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyContacts"
+             x:Class="MyContacts.MainPage" Title="Contacts" BackgroundColor="Black"
+    >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid  Grid.Row="0" Margin="10">
+            <ScrollView>
+                <ListView x:Name="list"   SelectedItem="{Binding SelectedContact, Mode=TwoWay}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Frame BorderColor="Blue" BackgroundColor="Black">
+                                        <StackLayout Orientation="Vertical"  Margin="10">
+                                            <Label Text="Name: " FontSize="Large"  TextColor="White"/>
+                                            <Label Text="{Binding Name}" FontSize="Medium"   FontAttributes="Bold" TextColor="White"/>
+                                            <Label Text="Last Name: " FontSize="Large"  TextColor="White"/>
+                                            <Label Text="{Binding LastName}" FontSize="Medium"  FontAttributes="Bold" TextColor="White"/>
+                                            <Label Text="e-mail: " FontSize="Large"  TextColor="White"/>
+                                            <Label Text="{Binding E_Mail}" FontSize="Medium"  FontAttributes="Bold" TextColor="White"/>
+                                            <Label Text="Phone number: " FontSize="Large" TextColor="White"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="+380"  FontAttributes="Bold" FontSize="Medium" TextColor="White"/>
+                                                <Label Text="{Binding NumberPhone}"  FontAttributes="Bold" FontSize="Medium" TextColor="White"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame> 
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Text="..."
+                        Command="{Binding UpdateCommand}"
+                        FontSize="15"
+                        BackgroundColor="Blue"
+                        TextColor="White"
+                        WidthRequest="10"
+                        HeightRequest="10"  
+                        Margin="35,1"
+                        BorderRadius="90" 
+                        Grid.Column="0"
+                        IsVisible="{Binding CallEnabled}" CommandParameter="{Binding}" ></Button>
+                <Button Text="+" 
+                        Command="{Binding AddContact}" 
+                        FontSize="25" 
+                        BackgroundColor="Blue"
+                        TextColor="White"
+                        WidthRequest="10"
+                        HeightRequest="10" 
+                        Margin="35,1" 
+                        BorderRadius="90" 
+                        Grid.Column="1"></Button>
+                <Button Text="Call"
+                        Command="{Binding CallCommand}"
+                        BackgroundColor="Blue"
+                        TextColor="White"
+                        WidthRequest="10"
+                        HeightRequest="10"
+                        Margin="35,1" 
+                        BorderRadius="90"
+                        Grid.Column="2"
+                        IsEnabled="{Binding CallEnabled,Mode=TwoWay}"
+                        IsVisible="{Binding CallEnabled}"
+                        ></Button>
+            </Grid>
+        </Grid>
+    </Grid>
+   
+
+</ContentPage>

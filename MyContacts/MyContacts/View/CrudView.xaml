@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyContacts.View.CrudView" BackgroundColor="Black">
+    <!--<ContentPage.Content >
+        <StackLayout Margin="10">
+            <StackLayout >
+                <Button Text="Add Photo" Command="{Binding AddPhoto}" TextColor="White"></Button>
+                <Label Text="Name: " Margin="7" TextColor="White"/>
+                <Entry BackgroundColor="Gray" Margin="6" Text="{Binding Name}" TextColor="White" FontSize="Medium" />
+                <Label Text="Last Name:" Margin="7" TextColor="White" />
+                <Entry Text="{Binding LastName}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                <Label Text="E-Mail: " Margin="7" TextColor="White" />
+                <Entry Text="{Binding E_Mail}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                <Label Text="Number Phone" Margin="7" TextColor="White" />
+                <Entry Text="{Binding NumberPhone}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Add" Command="{Binding AddCommand}" IsEnabled="{Binding IsEnabled}" IsVisible="{Binding IsEnabled}" CommandParameter="{Binding}" />
+                <Button Text="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
+                <Button Text="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="10">
+            <StackLayout >
+                <Button Text="Add Photo" Command="{Binding AddPhoto}" TextColor="White"></Button>
+                <Label Text="Name: " Margin="7" TextColor="White"/>
+                <Entry BackgroundColor="Gray" Margin="6" Text="{Binding Name}" TextColor="White" FontSize="Medium" />
+                <Label Text="Last Name:" Margin="7" TextColor="White" />
+                <Entry Text="{Binding LastName}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                <Label Text="E-Mail: " Margin="7" TextColor="White" />
+                <Entry Text="{Binding E_Mail}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                <Label Text="Number Phone" Margin="7" TextColor="White" />
+                <Entry Text="{Binding NumberPhone}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Text="Add"
+                        Command="{Binding AddCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        IsVisible="{Binding IsEnabled}"
+                        CommandParameter="{Binding}" />
+                <Button Grid.Column="1" Text="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
+                <Button Grid.Column="2" Text="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding}"/>
+                <Button Grid.Column="3" Text="SMS" ></Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
