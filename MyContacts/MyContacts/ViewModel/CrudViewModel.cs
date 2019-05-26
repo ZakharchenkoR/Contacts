@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using MyContacts.View;
 
 namespace MyContacts.ViewModel
 {
@@ -77,6 +78,7 @@ namespace MyContacts.ViewModel
             DeleteCommand = new Command(DeleteContact);
             UpdateCommand = new Command(UpdateContact);
             AddPhoto = new Command(GetPhoto);
+            SentSMSCommand = new Command(SentSMS);
         }
 
         public ICommand AddCommand { get; private set; }
@@ -103,6 +105,12 @@ namespace MyContacts.ViewModel
             ToContact.Contact = null;
             ToContact.Update = false;
             await Navigation.PopModalAsync();
+        }
+
+        public ICommand SentSMSCommand { get; private set; }
+        private void SentSMS()
+        {
+            Navigation.PushModalAsync(new SMSView());
         }
 
         public ICommand AddPhoto { get; private set; }
