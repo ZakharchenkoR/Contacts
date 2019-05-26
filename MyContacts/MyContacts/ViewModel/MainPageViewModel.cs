@@ -43,6 +43,7 @@ namespace MyContacts.ViewModel
             }
         }
 
+
         public  MainPageViewModel()
         {
             InitializeCommand();
@@ -63,6 +64,7 @@ namespace MyContacts.ViewModel
             toContact.Update = true;
             Navigation.PushModalAsync(new CrudView());
             CallEnabled = false;
+            SelectedContact = null;
 
         }
         public ICommand AddContact { get; private set; }
@@ -74,12 +76,13 @@ namespace MyContacts.ViewModel
         public ICommand CallCommand { get; private set; }
         private void Call()
         {
+            CallEnabled = false;
             if (SelectedContact == null)
                 return;
             var phoneDialer = CrossMessaging.Current.PhoneDialer;
             if (phoneDialer.CanMakePhoneCall)
                 phoneDialer.MakePhoneCall($"+380{SelectedContact.NumberPhone.ToString()}");
-            CallEnabled = false;
+            SelectedContact = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

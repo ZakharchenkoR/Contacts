@@ -33,13 +33,19 @@ namespace MyContacts.ViewModel
         }
 
         private string name;
-
         public string Name
         {
             get { return name; }
             set { name = value; Notify(); }
         }
 
+        private string uri;
+
+        public string Uri
+        {
+            get { return uri; }
+            set { uri = value; Notify(); }
+        }
 
 
         public SMSViewModel()
@@ -47,6 +53,7 @@ namespace MyContacts.ViewModel
             navigation = singleton.Navigation;
             this.Number = singletonContact.Contact.NumberPhone;
             this.Name = singletonContact.Contact.Name;
+            this.Uri = singletonContact.Contact.Uri;
             SentSMSCommand = new Command(SentSMS);
         }
 

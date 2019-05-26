@@ -1,48 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyContacts.View.CrudView" BackgroundColor="Black">
+             x:Class="MyContacts.View.CrudView" BackgroundColor="#262525">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="10">
+        <Grid Grid.Row="0" Margin="5">
             <StackLayout >
-                <Button Text="Add Photo" Command="{Binding AddPhoto}" TextColor="White"></Button>
-                <Label Text="Name: " Margin="7" TextColor="White"/>
-                <Entry BackgroundColor="Gray" Margin="6" Text="{Binding Name}" TextColor="White" FontSize="Medium" />
-                <Label Text="Last Name:" Margin="7" TextColor="White" />
-                <Entry Text="{Binding LastName}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
-                <Label Text="E-Mail: " Margin="7" TextColor="White" />
-                <Entry Text="{Binding E_Mail}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
-                <Label Text="Number Phone" Margin="7" TextColor="White" />
-                <Entry Text="{Binding NumberPhone}" Margin="6" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                <Button Text="Add Photo"
+                        Command="{Binding AddPhoto}"
+                        Margin="150,5,150,5"
+                        BackgroundColor="#1976D2"                        
+                        BorderRadius="90" 
+                        TextColor="White"></Button>
+                <Frame CornerRadius="90" Margin="160,0,160,0" HeightRequest="60" BackgroundColor="Gray">
+                    <Image  Source="{Binding Uri}" HeightRequest="50" WidthRequest="50"></Image>
+                </Frame>
+                <Label Text="Name: " Margin="3" TextColor="White"/>
+                <Frame  CornerRadius="90" BackgroundColor="Gray">
+                    <Entry BackgroundColor="Gray" Margin="4" Text="{Binding Name}" TextColor="White" FontSize="Medium" />
+                </Frame>
+                <Label Text="Last Name:" Margin="3" TextColor="White" />
+                <Frame CornerRadius="90" BackgroundColor="Gray">
+                    <Entry Text="{Binding LastName}" Margin="4" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                </Frame>
+                <Label Text="E-Mail: " Margin="3" TextColor="White" />
+                <Frame CornerRadius="90" BackgroundColor="Gray">
+                    <Entry Text="{Binding E_Mail}" Margin="4" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                </Frame>
+                <Label Text="Number Phone" Margin="3" TextColor="White" />
+                <Frame CornerRadius="90" BackgroundColor="Gray">
+                    <Entry Text="{Binding NumberPhone}" Margin="4" BackgroundColor="Gray" TextColor="White" FontSize="Medium" />
+                </Frame>
             </StackLayout>
         </Grid>
-        <Grid Grid.Row="1">
+        <Button Grid.Row="1"
+                        Text="Add"
+                        Command="{Binding AddCommand}" 
+                        IsEnabled="{Binding IsEnabledAdd}"
+                        IsVisible="{Binding IsEnabledAdd}"
+                        Margin="160,10,160,10"
+                        BackgroundColor="#1976D2"                     
+                        BorderRadius="90" 
+                        CommandParameter="{Binding}" />
+        <Grid Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0"
-                        Text="Add"
-                        Command="{Binding AddCommand}" 
-                        IsEnabled="{Binding IsEnabled}"
-                        IsVisible="{Binding IsEnabled}"
-                        CommandParameter="{Binding}" />
-                <Button Grid.Column="1" Text="Delete"
+                <Button Grid.Column="0" Text="Delete"
                         Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding}" />
-                <Button Grid.Column="2" Text="Update"
+                        CommandParameter="{Binding}"
+                        IsEnabled="{Binding IsEnabledOther}"
+                        IsVisible="{Binding IsEnabledOther}"
+                         WidthRequest="10"
+                        HeightRequest="10"
+                        BackgroundColor="#1976D2"                        
+                        BorderRadius="90"/>
+                <Button Grid.Column="1" Text="Update"
                         Command="{Binding UpdateCommand}" 
-                        CommandParameter="{Binding}"/>
-                <Button Grid.Column="3"
+                        IsEnabled="{Binding IsEnabledOther}"
+                        IsVisible="{Binding IsEnabledOther}"
+                        CommandParameter="{Binding}"
+                        BackgroundColor="#1976D2"  
+                         WidthRequest="10"
+                        HeightRequest="10"
+                        BorderRadius="90"/>
+                <Button Grid.Column="2"
                         Text="SMS"
-                        Command="{Binding SentSMSCommand}" ></Button>
+                        Command="{Binding SentSMSCommand}" 
+                        IsEnabled="{Binding IsEnabledOther}"
+                        IsVisible="{Binding IsEnabledOther  }"
+                         WidthRequest="10"
+                        HeightRequest="10"
+                        BackgroundColor="#1976D2"                        
+                        BorderRadius="90"></Button>
             </Grid>
         </Grid>
     </Grid>

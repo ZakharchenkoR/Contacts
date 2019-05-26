@@ -16,7 +16,7 @@
     <item name="colorPrimaryDark">#1976D2</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <item name="colorAccent">#FF4081</item>
+    <item name="colorAccent">#C7BDBD</item>
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
@@ -25,6 +25,15 @@
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-    <item name="colorAccent">#FF4081</item>
+    <item name="colorAccent">#C7BDBD</item>
   </style>
+  <style name="MyTheme" parent="android:style/Theme.Material.Light.DarkActionBar">
+    <item name="android:colorActivatedHighlight">@color/YourColor</item>
+    <item name="android:colorPressedHighlight">@color/YourColor</item>
+    <item name="android:colorLongPressedHighlight">@color/YourColor</item>
+    <item name="android:colorFocusedHighlight">@color/YourColor</item>
+    <item name="android:activatedBackgroundIndicator">@color/YourColor</item>
+  </style>
+  <color name="YourColor">#96BCE3</color>
 </resources>
+

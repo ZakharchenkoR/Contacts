@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using MyContacts.View;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 
 namespace MyContacts.ViewModel
 {
@@ -50,11 +52,28 @@ namespace MyContacts.ViewModel
         }
 
         private bool isEnabled = true;
-        public bool IsEnabled
+        public bool IsEnabledAdd
         {
             get { return isEnabled; }
             set { isEnabled = value; Notify(); }
         }
+
+        private bool isEnabledOther = false;
+        public bool IsEnabledOther
+        {
+            get { return isEnabledOther; }
+            set { isEnabledOther = value; Notify(); }
+        }
+
+
+        private string uri;
+
+        public string Uri
+        {
+            get { return uri; }
+            set { uri = value; Notify(); }
+        }
+
 
 
         public CrudViewModel()
@@ -67,7 +86,9 @@ namespace MyContacts.ViewModel
                 this.LastName = ToContact.Contact.LastName;
                 this.NumberPhone = ToContact.Contact.NumberPhone;
                 this.E_Mail = ToContact.Contact.E_Mail;
-                this.IsEnabled = false;
+                this.Uri = ToContact.Contact.Uri;
+                this.IsEnabledAdd = false;
+                this.IsEnabledOther = true;
             }
             InitializeCommand();
         }
@@ -84,7 +105,7 @@ namespace MyContacts.ViewModel
         public ICommand AddCommand { get; private set; }
         private async void Add()
         {
-            Contact temp = new Contact { Name = this.Name, LastName = this.LastName, E_Mail = this.E_Mail, NumberPhone = this.NumberPhone };
+            Contact temp = new Contact { Name = this.Name, LastName = this.LastName, E_Mail = this.E_Mail, NumberPhone = this.NumberPhone ,Uri = this.Uri};
             await App.Database.SaveItemAsync(temp);
             await Navigation.PopModalAsync();
         }
@@ -116,6 +137,11 @@ namespace MyContacts.ViewModel
         public ICommand AddPhoto { get; private set; }
         private async void GetPhoto()
         {
+            if (CrossMedia.Current.IsPickPhotoSupported)
+            {
+                MediaFile photo = await CrossMedia.Current.PickPhotoAsync();
+                Uri = photo.Path;
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void Notify([CallerMemberName]string propName = "")

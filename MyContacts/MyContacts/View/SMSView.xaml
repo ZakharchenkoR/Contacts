@@ -1,26 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyContacts.View.SMSView">
+             x:Class="MyContacts.View.SMSView" BackgroundColor="#262525">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="7*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Frame Grid.Row="0" BorderColor="Blue">
-            <StackLayout  Orientation="Vertical">
-                <Label Text="To:"></Label>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="+380"></Label>
-                    <Label Text="{Binding Number}"></Label>
-                </StackLayout>
-                <Label Text="{Binding Name}"></Label>
+        <StackLayout  Orientation="Vertical">
+            <Frame CornerRadius="90" Margin="160,0,160,0" HeightRequest="60" BackgroundColor="Gray">
+                <Image  Source="{Binding Uri}" HeightRequest="50" WidthRequest="50"></Image>
+            </Frame>
+            <StackLayout Orientation="Horizontal">
+                <Label TextColor="White" Text="+380"></Label>
+                <Label TextColor="White" Text="{Binding Number}"></Label>
             </StackLayout>
+            <Label TextColor="White" FontSize="Large" Text="{Binding Name}"></Label>
+        </StackLayout>
+        <Frame Grid.Row="1" BackgroundColor="Gray" CornerRadius="90" BorderColor="#1976D2">
+            <Editor BackgroundColor="Gray" Text="{Binding TextSMS}"></Editor>
         </Frame>
-        <Frame Grid.Row="1">
-            <Editor  Text="{Binding TextSMS}"></Editor>
-        </Frame>
-        <Button Grid.Row="2" Text="Sent" Command="{Binding SentSMSCommand}"></Button>
+        <Button Grid.Row="2" 
+                BorderRadius="90" 
+                Margin="160,40" 
+                TextColor="White" 
+                BackgroundColor="#1976D2" 
+                Text="Sent" 
+                Command="{Binding SentSMSCommand}"></Button>
     </Grid>
 </ContentPage>

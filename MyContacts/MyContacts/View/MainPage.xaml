@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyContacts"
-             x:Class="MyContacts.MainPage" Title="Contacts" BackgroundColor="Black"
+             x:Class="MyContacts.MainPage" Title="Contacts" BackgroundColor="#262525"
     >
     <Grid>
         <Grid.RowDefinitions>
@@ -16,19 +16,13 @@
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.View>
-                                    <Frame BorderColor="Blue" BackgroundColor="Black">
-                                        <StackLayout Orientation="Vertical"  Margin="10">
-                                            <Label Text="Name: " FontSize="Large"  TextColor="White"/>
+                                    <Frame CornerRadius="90" BorderColor="#1976D2" BackgroundColor="#3C3A3A" Margin="5">
+                                        <StackLayout Orientation="Horizontal"  Margin="10">
+                                            <Frame CornerRadius="90" BackgroundColor="Gray">
+                                                <Image Aspect="AspectFill" HeightRequest="40" WidthRequest="40" Source="{Binding Uri}"></Image>
+                                            </Frame>
                                             <Label Text="{Binding Name}" FontSize="Medium"   FontAttributes="Bold" TextColor="White"/>
-                                            <Label Text="Last Name: " FontSize="Large"  TextColor="White"/>
                                             <Label Text="{Binding LastName}" FontSize="Medium"  FontAttributes="Bold" TextColor="White"/>
-                                            <Label Text="e-mail: " FontSize="Large"  TextColor="White"/>
-                                            <Label Text="{Binding E_Mail}" FontSize="Medium"  FontAttributes="Bold" TextColor="White"/>
-                                            <Label Text="Phone number: " FontSize="Large" TextColor="White"/>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="+380"  FontAttributes="Bold" FontSize="Medium" TextColor="White"/>
-                                                <Label Text="{Binding NumberPhone}"  FontAttributes="Bold" FontSize="Medium" TextColor="White"/>
-                                            </StackLayout>
                                         </StackLayout>
                                     </Frame> 
                                 </ViewCell.View>
@@ -48,7 +42,7 @@
                 <Button Text="..."
                         Command="{Binding UpdateCommand}"
                         FontSize="15"
-                        BackgroundColor="Blue"
+                        BackgroundColor="#1976D2"
                         TextColor="White"
                         WidthRequest="10"
                         HeightRequest="10"  
@@ -59,7 +53,7 @@
                 <Button Text="+" 
                         Command="{Binding AddContact}" 
                         FontSize="25" 
-                        BackgroundColor="Blue"
+                        BackgroundColor="#1976D2"
                         TextColor="White"
                         WidthRequest="10"
                         HeightRequest="10" 
@@ -68,7 +62,7 @@
                         Grid.Column="1"></Button>
                 <Button Text="Call"
                         Command="{Binding CallCommand}"
-                        BackgroundColor="Blue"
+                        BackgroundColor="#1976D2"
                         TextColor="White"
                         WidthRequest="10"
                         HeightRequest="10"
