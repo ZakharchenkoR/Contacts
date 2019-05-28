@@ -122,6 +122,10 @@ namespace MyContacts.ViewModel
         public ICommand UpdateCommand { get; private set; }
         private async void UpdateContact()
         {
+            ToContact.Contact.E_Mail = this.E_Mail;
+            ToContact.Contact.Name = this.Name;
+            ToContact.Contact.LastName = this.LastName;
+            ToContact.Contact.NumberPhone = this.NumberPhone;
             await App.Database.UpdateItemAsync(ToContact.Contact);
             ToContact.Contact = null;
             ToContact.Update = false;

@@ -1,4 +1,5 @@
 ﻿using MyContacts.Model;
+using MyContacts.Utils.CallSetings;
 using MyContacts.Utils.Singleton;
 using MyContacts.View;
 using Plugin.Messaging;
@@ -16,9 +17,9 @@ namespace MyContacts.ViewModel
 {
     class MainPageViewModel:INotifyPropertyChanged
     {
-        SingletonToNavigation singleton = SingletonToNavigation.GetInstance();
-
+        SingletonToNavigation singleton;
         public INavigation Navigation;
+
         private bool callEnabled = false;      
         public bool CallEnabled
         {
@@ -46,6 +47,7 @@ namespace MyContacts.ViewModel
 
         public  MainPageViewModel()
         {
+            singleton = SingletonToNavigation.GetInstance();
             InitializeCommand();
         }
 
@@ -64,8 +66,6 @@ namespace MyContacts.ViewModel
             toContact.Update = true;
             Navigation.PushModalAsync(new CrudView());
             CallEnabled = false;
-            SelectedContact = null;
-
         }
         public ICommand AddContact { get; private set; }
         private  void CreateContact()
@@ -76,13 +76,10 @@ namespace MyContacts.ViewModel
         public ICommand CallCommand { get; private set; }
         private void Call()
         {
-            CallEnabled = false;
             if (SelectedContact == null)
                 return;
-            var phoneDialer = CrossMessaging.Current.PhoneDialer;
-            if (phoneDialer.CanMakePhoneCall)
-                phoneDialer.MakePhoneCall($"+380{SelectedContact.NumberPhone.ToString()}");
-            SelectedContact = null;
+            DependencyService.Get<IPhoneCall>().Call($"+380{SelectedContact.NumberPhone.ToString()}");
+            CallEnabled = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

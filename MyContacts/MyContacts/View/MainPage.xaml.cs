@@ -13,21 +13,27 @@ namespace MyContacts
     [DesignTimeVisible(true)]
     public partial class MainPage : ContentPage
     {
-        SingletonToNavigation singleton = SingletonToNavigation.GetInstance();
+        SingletonToNavigation singleton;
         public MainPage()
         {
+            singleton = SingletonToNavigation.GetInstance();
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             singleton.Navigation = this.Navigation;
             this.BindingContext = new MainPageViewModel { Navigation = this.Navigation };
-
         }
 
+        
         protected override async void OnAppearing()
         {
             await App.Database.CreateTableAsync();
             list.ItemsSource = await App.Database.GetItemsAsync();
             base.OnAppearing();
+        }
+
+        private void ViewCell_Tapped(object sender, EventArgs e)
+        {
+           
         }
     }
 }

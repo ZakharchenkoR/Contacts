@@ -14,15 +14,25 @@
                 <ListView x:Name="list"   SelectedItem="{Binding SelectedContact, Mode=TwoWay}" HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <ViewCell Tapped="ViewCell_Tapped">
                                 <ViewCell.View>
                                     <Frame CornerRadius="90" BorderColor="#1976D2" BackgroundColor="#3C3A3A" Margin="5">
-                                        <StackLayout Orientation="Horizontal"  Margin="10">
+                                        <StackLayout HeightRequest="50" Orientation="Horizontal"  Margin="10">
                                             <Frame CornerRadius="90" BackgroundColor="Gray">
-                                                <Image Aspect="AspectFill" HeightRequest="40" WidthRequest="40" Source="{Binding Uri}"></Image>
+                                                <Image Aspect="AspectFill" HeightRequest="30" WidthRequest="30" Source="{Binding Uri}"></Image>
                                             </Frame>
-                                            <Label Text="{Binding Name}" FontSize="Medium"   FontAttributes="Bold" TextColor="White"/>
-                                            <Label Text="{Binding LastName}" FontSize="Medium"  FontAttributes="Bold" TextColor="White"/>
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="Medium" 
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"  
+                                                   FontAttributes="Bold" 
+                                                   TextColor="White"/>
+                                            <Label Text="{Binding LastName}"
+                                                   FontSize="Medium" 
+                                                   FontAttributes="Bold" 
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   TextColor="White"/>
                                         </StackLayout>
                                     </Frame> 
                                 </ViewCell.View>

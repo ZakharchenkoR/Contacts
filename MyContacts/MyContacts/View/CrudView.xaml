@@ -54,6 +54,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Text="Delete"
+                        Margin="20,0"
                         Command="{Binding DeleteCommand}"
                         CommandParameter="{Binding}"
                         IsEnabled="{Binding IsEnabledOther}"
@@ -63,6 +64,7 @@
                         BackgroundColor="#1976D2"                        
                         BorderRadius="90"/>
                 <Button Grid.Column="1" Text="Update"
+                        Margin="20,0"
                         Command="{Binding UpdateCommand}" 
                         IsEnabled="{Binding IsEnabledOther}"
                         IsVisible="{Binding IsEnabledOther}"
@@ -72,11 +74,12 @@
                         HeightRequest="10"
                         BorderRadius="90"/>
                 <Button Grid.Column="2"
+                        Margin="20,0"
                         Text="SMS"
                         Command="{Binding SentSMSCommand}" 
                         IsEnabled="{Binding IsEnabledOther}"
                         IsVisible="{Binding IsEnabledOther  }"
-                         WidthRequest="10"
+                        WidthRequest="10"
                         HeightRequest="10"
                         BackgroundColor="#1976D2"                        
                         BorderRadius="90"></Button>

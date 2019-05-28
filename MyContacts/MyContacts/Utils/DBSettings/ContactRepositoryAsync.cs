@@ -46,9 +46,9 @@ namespace MyContacts.Utils.DBSettings
 
         public async Task UpdateItemAsync( Contact item)
         {
-            //var temp = GetItemAsync(item.Id);
+            Contact temp = new Contact { Name = item.Name, LastName = item.LastName, NumberPhone = item.NumberPhone, E_Mail = item.E_Mail, Uri = item.Uri };
             await DeleteItemAsync(item);
-            await SaveItemAsync(item);
+            await SaveItemAsync(temp);
         }
     }
 }
