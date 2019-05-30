@@ -8,8 +8,8 @@ namespace MyContacts
     public partial class App : Application
     {
         public const string DATABASE_NAME = "ContactsDB.db";
-        public static ContactAsyncRepository database;
-        public static ContactAsyncRepository Database
+        public static IRepository database;
+        public static IRepository Database
         {
             get
             {
