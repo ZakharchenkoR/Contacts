@@ -1,10 +1,12 @@
 ﻿using MyContacts.Utils.Singleton;
+using MyContacts.Utils.SMSSettings;
 using Plugin.Messaging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,8 +14,9 @@ namespace MyContacts.ViewModel
 {
     class SMSViewModel : INotifyPropertyChanged
     {
-        SingletonToNavigation singleton = SingletonToNavigation.GetInstance();
-        SingletonToContact singletonContact = SingletonToContact.GetInstance();
+        SMSSent sent;
+        SingletonToNavigation singleton;
+        SingletonToContact singletonContact;
         private INavigation navigation;
 
         private string textSMS;
@@ -50,6 +53,9 @@ namespace MyContacts.ViewModel
 
         public SMSViewModel()
         {
+            singleton = SingletonToNavigation.GetInstance();
+            singletonContact = SingletonToContact.GetInstance();
+            sent = new SMSSent();
             navigation = singleton.Navigation;
             this.Number = singletonContact.Contact.NumberPhone;
             this.Name = singletonContact.Contact.Name;
@@ -58,12 +64,15 @@ namespace MyContacts.ViewModel
         }
 
         public ICommand SentSMSCommand { get; private set; }
-        private void SentSMS()
+        private async void SentSMS()
         {
-            var smsMessenger = CrossMessaging.Current.SmsMessenger;
-            if (smsMessenger.CanSendSms)
-                smsMessenger.SendSms($"+380{Number}", $"{TextSMS}");
-            navigation.PopModalAsync();
+            await sent.SendSms(TextSMS, $"+380{Number}");
+            await GoBack();
+        }
+
+        private async Task GoBack()
+        {
+            await navigation.PopModalAsync();
         }
         
         public event PropertyChangedEventHandler PropertyChanged;

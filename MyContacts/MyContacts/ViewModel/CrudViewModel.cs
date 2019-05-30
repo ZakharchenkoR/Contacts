@@ -11,13 +11,14 @@ using Xamarin.Forms;
 using MyContacts.View;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using MyContacts.Utils.SMSSettings;
 
 namespace MyContacts.ViewModel
 {
     class CrudViewModel:INotifyPropertyChanged
     {
-        SingletonToNavigation singletonNavigation = SingletonToNavigation.GetInstance();
-        SingletonToContact ToContact;
+        SingletonToNavigation singletonNavigation;
+        SingletonToContact contact;
         INavigation Navigation { get; set; }
         private string name;
         public string Name
@@ -78,15 +79,16 @@ namespace MyContacts.ViewModel
 
         public CrudViewModel()
         {
+            singletonNavigation = SingletonToNavigation.GetInstance();
             Navigation = singletonNavigation.Navigation;
-            ToContact = SingletonToContact.GetInstance();
-            if(ToContact.Update)
+            contact = SingletonToContact.GetInstance();
+            if(contact.Update)
             {
-                this.Name = ToContact.Contact.Name;
-                this.LastName = ToContact.Contact.LastName;
-                this.NumberPhone = ToContact.Contact.NumberPhone;
-                this.E_Mail = ToContact.Contact.E_Mail;
-                this.Uri = ToContact.Contact.Uri;
+                this.Name = contact.Contact.Name;
+                this.LastName = contact.Contact.LastName;
+                this.NumberPhone = contact.Contact.NumberPhone;
+                this.E_Mail = contact.Contact.E_Mail;
+                this.Uri = contact.Contact.Uri;
                 this.IsEnabledAdd = false;
                 this.IsEnabledOther = true;
             }
@@ -113,27 +115,27 @@ namespace MyContacts.ViewModel
         public ICommand DeleteCommand { get; set; }
         private async void DeleteContact()
         {
-            await App.Database.DeleteItemAsync(ToContact.Contact);
-            ToContact.Contact = null;
-            ToContact.Update = false;
+            await App.Database.DeleteItemAsync(contact.Contact);
+            contact.Contact = null;
+            contact.Update = false;
             await Navigation.PopModalAsync();
         }
 
         public ICommand UpdateCommand { get; private set; }
         private async void UpdateContact()
         {
-            ToContact.Contact.E_Mail = this.E_Mail;
-            ToContact.Contact.Name = this.Name;
-            ToContact.Contact.LastName = this.LastName;
-            ToContact.Contact.NumberPhone = this.NumberPhone;
-            await App.Database.UpdateItemAsync(ToContact.Contact);
-            ToContact.Contact = null;
-            ToContact.Update = false;
+            contact.Contact.E_Mail = this.E_Mail;
+            contact.Contact.Name = this.Name;
+            contact.Contact.LastName = this.LastName;
+            contact.Contact.NumberPhone = this.NumberPhone;
+            await App.Database.UpdateItemAsync(contact.Contact);
+            contact.Contact = null;
+            contact.Update = false;
             await Navigation.PopModalAsync();
         }
 
         public ICommand SentSMSCommand { get; private set; }
-        private void SentSMS()
+        private  void SentSMS()
         {
             Navigation.PushModalAsync(new SMSView());
         }
@@ -141,10 +143,17 @@ namespace MyContacts.ViewModel
         public ICommand AddPhoto { get; private set; }
         private async void GetPhoto()
         {
-            if (CrossMedia.Current.IsPickPhotoSupported)
+            try
             {
-                MediaFile photo = await CrossMedia.Current.PickPhotoAsync();
-                Uri = photo.Path;
+                if (CrossMedia.Current.IsPickPhotoSupported)
+                {
+                    MediaFile photo = await CrossMedia.Current.PickPhotoAsync();
+                    Uri = photo.Path;
+                }
+            }
+            catch(Exception)
+            {
+
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
